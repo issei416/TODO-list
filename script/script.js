@@ -13,10 +13,11 @@ form.addEventListener('submit', (e) => {
     todojson = {
         taskname,
         taskdesc,
-        duedate
+        duedate,
+        "status" : "pending"
     }
     postdata(todojson);
-    loadtask();
+    form.reset();
 })
 
 function postdata(todojson) {
@@ -30,6 +31,7 @@ function postdata(todojson) {
     }
     fetch(url, requestOptions);
     window.alert("Task added successfully")
+    loadtask();
 }
 
 async function loadtask() {
@@ -59,7 +61,7 @@ async function loadtask() {
         card.appendChild(cardbody)
 
         let cardheader = document.createElement("p");
-        cardheader.classList.add("card-header", "text-center", "border", "border-dark", "rounded");
+        cardheader.classList.add("card-header", "text-center", "border", "border-dark", "rounded",);
         cardheader.innerText = task.taskname;
         cardbody.appendChild(cardheader);
 
@@ -69,7 +71,8 @@ async function loadtask() {
         cardbody.appendChild(cardtext)
 
         let cardfooter = document.createElement("div");
-        cardfooter.classList.add("card-footer","d-flex","justify-content-between")
+        cardfooter.classList.add("card-footer","text-center")
+        card.appendChild(cardfooter)
 
         let carddue = document.createElement("p");
         carddue.classList.add("card-text");
@@ -77,7 +80,15 @@ async function loadtask() {
         carddue.innerText = "Due On : "+taskdue.toLocaleDateString();
         cardbody.appendChild(carddue);
 
-        
+        let statusbtn = document.createElement("button");
+        let status = task.status;
+        // statusbtn.innerText = status;
+        if (status == "pending") {
+            card.classList.add("bg-red");
+            statusbtn.classList.add("bg-red","rounded","col-12");
+            statusbtn.innerHTML = `<img src="./public/pending.png"></img>`
+            cardfooter.appendChild(statusbtn);
+        }
     })
 }
 

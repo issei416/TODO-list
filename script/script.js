@@ -17,6 +17,7 @@ form.addEventListener('submit', (e) => {
         "status" : "pending"
     }
     postdata(todojson);
+    loadtask();
     form.reset();
 })
 
@@ -31,7 +32,6 @@ function postdata(todojson) {
     }
     fetch(url, requestOptions);
     window.alert("Task added successfully")
-    loadtask();
 }
 
 async function loadtask() {
@@ -70,15 +70,15 @@ async function loadtask() {
         cardtext.innerText = task.taskdesc;
         cardbody.appendChild(cardtext)
 
-        let cardfooter = document.createElement("div");
-        cardfooter.classList.add("card-footer","text-center")
-        card.appendChild(cardfooter)
-
         let carddue = document.createElement("p");
         carddue.classList.add("card-text");
         let taskdue = new Date(task.taskdue * 1000);
         carddue.innerText = "Due On : "+taskdue.toLocaleDateString();
         cardbody.appendChild(carddue);
+
+        let cardfooter = document.createElement("div");
+        cardfooter.classList.add("card-footer","text-center")
+        card.appendChild(cardfooter)
 
         let statusbtn = document.createElement("button");
         let status = task.status;

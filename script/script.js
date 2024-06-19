@@ -30,7 +30,7 @@ function postdata(todojson) {
         body: JSON.stringify(todojson),
         redirect: "follow"
     }
-    fetch(url, requestOptions);
+    fetch(url, requestOptions).then(loadtask);
     window.alert("Task added successfully")
 }
 
@@ -42,9 +42,9 @@ function deletedata(taskid) {
             headers: {
                 "Content-Type": "application/json"
             }
-        })
+        }).then(loadtask)
         window.alert("task deleted successfully");
-        loadtask();
+        
     }
 }
 
@@ -133,7 +133,7 @@ async function loadtask() {
 
 
         let deletebtn = document.createElement("div");
-        deletebtn.classList.add("col-2", "btn", "deletebtn", "ms-1", "d-flex", "justify-content-center", "align-items-center");
+        deletebtn.classList.add("col-2", "btn", "deletebtn", "ms-2", "d-flex", "justify-content-center", "align-items-center");
         deletebtn.innerHTML = `<img src="./public/delete.png"></img>`;
         deletebtn.id = task.id;
         deletebtn.addEventListener("click",deletedata(deletebtn.id));

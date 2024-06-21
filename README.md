@@ -11,3 +11,5 @@ hence TODo lists were the go to solution for every wariors to march towards the 
 ### Updates to come:
 * Authenticate users
 * Sort and drag features for task cards
+
+The site is deployed in netlify, to visit [click here](https://todo-dev-it.netlify.app)
